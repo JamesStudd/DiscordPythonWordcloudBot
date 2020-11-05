@@ -25,7 +25,7 @@ async def on_message(message):
 
 @bot.event
 async def handle_search_pm(channel):
-    print(f"Beginning search for {channel.name}")
+    print(f"Beginning search for {channel.id}")
     messages = await channel.history(limit=None).flatten()
     message_infos = {}
 
@@ -37,7 +37,7 @@ async def handle_search_pm(channel):
             message_infos[message.author.name] += 1
         all_messages.append(message.content)
 
-    fd = open(path.join(d, f"output/{channel.id}-{channel.name}-output.txt"), "w+")
+    fd = open(path.join(d, f"output/{channel.id}-output.txt"), "w+")
     total_length = 0
     for line in all_messages:
         clean_line = re.sub(r"""
@@ -62,11 +62,11 @@ async def handle_search_pm(channel):
     print("Specific message breakdown: (how many messages per each person)")
     print(message_infos)
     print("Generating word cloud...")
-    generate_word_cloud(channel.name, channel.id)
+    generate_word_cloud(channel.id)
         
 
-def generate_word_cloud(channel_name, channel_id):
-    text = open(path.join(d, f'output/{channel_id}-{channel_name}-output.txt')).read()
+def generate_word_cloud(channel_id):
+    text = open(path.join(d, f'output/{channel_id}-output.txt')).read()
 
     words = open(path.join(d, "stopwords.txt"), "r")
     content = words.read()
@@ -79,8 +79,8 @@ def generate_word_cloud(channel_name, channel_id):
     plt.axis("off")
     plt.show()
 
-    wordcloud.to_file(path.join(d, f"output/{channel_id}-{channel_name}-output.png"))
-    print(f"Files outputted to output/{channel_id}-{channel_name} png and txt")
+    wordcloud.to_file(path.join(d, f"output/{channel_id}-output.png"))
+    print(f"Files outputted to output/{channel_id} png and txt")
     exit()
 
     
