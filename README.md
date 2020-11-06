@@ -12,5 +12,5 @@ Recommend installing numpy1.19.3 rather than numpy1.19.4 to avoid `runtimeError:
 Get a token (user token can be retrieved by following https://github.com/Tyrrrz/DiscordChatExporter/wiki/Obtaining-Token-and-Channel-IDs#how-to-get-a-user-token  
 Place the token in the string at the bottom "Your Token Here"  
 Run the bot using `python main.py`  
-Go into any channel and type `!search`  
+Go into any channel (including DMs) and type `!search`  
 Wait
